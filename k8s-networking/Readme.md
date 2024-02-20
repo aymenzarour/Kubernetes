@@ -27,6 +27,3 @@ To deploy and manage services in Kubernetes:
 2. Apply the service definition using `kubectl apply -f your-service.yaml`.
 3. Use the service name and appropriate type to access the pods from other parts of the cluster.
 
-For detailed information on creating services, refer to the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/service/).
-
-Feel free to explore different service types and experiment with load balancing configurations for your applications.
