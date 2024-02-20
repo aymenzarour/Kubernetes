@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: apache-daemonset
+  labels:
+    app: apache
+spec:
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      nodeSelector:
+        ssd: "true"
+      containers:
+      - name: apache-container
+        image: httpd:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: apache-storage
+          mountPath: /usr/local/apache2/htdocs
+      volumes:
+      - name: apache-storage
+        hostPath:
+          path: /tmp/apache
