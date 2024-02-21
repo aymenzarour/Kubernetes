@@ -31,6 +31,7 @@ The web application service (`front-svc.yaml`) is configured as a NodePort servi
    ```bash
    docker build -t aymenzarour/php-web:v6 -f php-dockerfile .
    docker push aymenzarour/php-web:v6
+   ```
 
 2. **Apply MySQL ConfigMap and Deploy MySQL Database:**
 
@@ -38,33 +39,37 @@ The web application service (`front-svc.yaml`) is configured as a NodePort servi
    kubectl create configmap mysql-init-script --from-file=init.sql
    kubectl apply -f mysql-svc.yaml
    kubectl apply -f mysql-deployment.yaml
+   ```
    
 3. **Wait for MySQL Deployment to be Ready:**
 
    ```bash
    kubectl get pods -w
+   ```
    
-*Terminal response:*
+- Terminal response:
 
-   ```text
+   ```bash
    NAME                                   READY   STATUS    RESTARTS   AGE
    mysql-deployment-5b55687dff-mq5ln      1/1     Running   0          4h16m
-  ```
+   ```
 
 4. **Apply Frontend Deployment and Service:**
 
    ```bash
    kubectl apply -f front-deployment.yaml
    kubectl apply -f front-svc.yaml
+   ```
    
 5. **Wait for Frontend Deployment to be Ready:**
 
    ```bash
    kubectl get pods -w
+   ```
    
-*Terminal response:*
+- Terminal response:
 
-   ```text
+   ```bash
    NAME                                   READY   STATUS    RESTARTS   AGE
    mysql-deployment-5b55687dff-mq5ln      1/1     Running   0          4h16m
    frontend-deployment-7d7d8df9d9-dfccj   1/1     Running   0          24m
@@ -75,21 +80,23 @@ The web application service (`front-svc.yaml`) is configured as a NodePort servi
 - Find the external IP of your Kubernetes node:
    ```bash
    kubectl get nodes -o wide
+   ```
    
-*Terminal response:*
+- Terminal response:
 
-   ```text
+   ```bash
    NAME      STATUS   ROLES                  AGE   VERSION        INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
    ubuntu1   Ready    control-plane,master   32d   v1.28.5+k3s1   192.168.43.96   <none>        Ubuntu 22.04.3 LTS   6.5.0-14-generic   containerd://1.7.11-k3s2
-  ```
+   ```
 
 - Access the web application using the node's IP and the NodePort 32500:
   ```bash
    curl http://192.168.43.96:32500
+  ```
      
-*browser:*
+- browser:
 
-   ```text
+   ```bash
    List of Cities
    Connected to MySQL successfully
    - New York
