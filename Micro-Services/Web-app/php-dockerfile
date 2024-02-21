@@ -1,0 +1,19 @@
+# Use a base image with PHP and Apache
+FROM php:apache
+
+# Install necessary PHP extensions for MySQL and PDO
+RUN apt-get update && \
+    apt-get install -y \
+        libzip-dev \
+        zip \
+        && \
+    docker-php-ext-install \
+        mysqli \
+        pdo \
+        pdo_mysql
+
+# Copy your PHP source code to the container
+COPY index.php /var/www/html/
+
+# Expose the port
+EXPOSE 80
