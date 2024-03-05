@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: webapp-pod
+  namespace: webapp
+spec:
+  selector:
+    app: webapp-pod
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      targetPort: 80
+      port: 8080
